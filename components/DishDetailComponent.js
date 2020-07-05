@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-import { View, Text, ScrollView, StyleSheet, FlatList, Modal, Button } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, FlatList, Modal, Button, Alert, PanResponder } from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import * as Animatable from 'react-native-animatable';
 
 import { postComment, postFavorite } from '../redux/ActionCreators';
 
@@ -26,9 +27,11 @@ function RenderDish({
 }) {
   if (dish != null) {
     return (
-      <Card
-        featuredTitle={dish.name}
-        image={{uri: baseUrl + dish.image}}>
+      <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+            <Card
+            featuredTitle={dish.name}
+            image={{uri: baseUrl + dish.image}}>
+      
       
         <Text style={{ margin: 10 }}>{dish.description}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -49,7 +52,9 @@ function RenderDish({
                         onPress={() => openCommentForm()}
                     />
                 </View>
-      </Card>
+                </Card>
+            </Animatable.View>
+            
     );
   } else {
     return <View></View>;
@@ -69,13 +74,15 @@ function RenderComments({comments}) {
     );
   };
   return (
-    <Card title="Comments">
-      <FlatList
-        data={comments}
-        renderItem={renderCommentItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
+    <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>        
+    <Card title='Comments' >
+        <FlatList 
+            data={comments}
+            renderItem={renderCommentItem}
+            keyExtractor={item => item.id.toString()}
+            />
     </Card>
+    </Animatable.View>
   );
 }
 
@@ -203,8 +210,7 @@ formRow: {
   flexDirection: 'row',
   margin: 20,
 },
-// Note formLabel and formItem will be inside formRow 
-// so the flexDirection will be row, and formLabel will be 2x size formItem
+
 formLabel: {
   fontSize: 18,
   flex: 2,
