@@ -1,89 +1,130 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 import { View, Text, ScrollView, StyleSheet, FlatList, Modal, Button, Alert, PanResponder } from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import * as Animatable from 'react-native-animatable';
-
 import { postComment, postFavorite } from '../redux/ActionCreators';
-
+import * as Animatable from 'react-native-animatable';
 const mapStateToProps = state => {
     return {
-      dishes: state.dishes,
-      comments: state.comments,
-      favorites: state.favorites
+        dishes: state.dishes,
+        comments: state.comments,
+        favorites: state.favorites,
     }
-  }
-  const mapDispatchToProps = dispatch => ({
+};
+const mapDispatchToProps = dispatch => ({
     postFavorite: (dishId) => dispatch(postFavorite(dishId)),
     postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
-  });
+});
 function RenderDish({ 
-  dish, 
-  favorite,
-  markFavorite,
-  openCommentForm,
+    dish, 
+    favorite,
+    markFavorite,
+    openCommentForm,
 }) {
-  if (dish != null) {
-    return (
-      <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
-            <Card
-            featuredTitle={dish.name}
-            image={{uri: baseUrl + dish.image}}>
-      
-      
-        <Text style={{ margin: 10 }}>{dish.description}</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                    <Icon 
-                        raised
-                        reverse
-                        name={ favorite ? 'heart' : 'heart-o' }
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={() => favorite ? console.log('Already favorited') : markFavorite()}
-                    />
-                    <Icon 
-                        raised
-                        reverse
-                        name='pencil'
-                        type='font-awesome'
-                        color='#512DA8'
-                        onPress={() => openCommentForm()}
-                    />
-                </View>
+
+    const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
+        if (dx < -200)
+            return true; 
+        return false;
+    };
+
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: (e, gestureState) => {
+            return true; 
+        },
+        onPanResponderEnd: (e, gestureState) => {
+            if (recognizeDrag(gestureState))
+                Alert.alert(
+                    'Add to Favorites?',
+                    'Are you sure you wish to add ' + dish.name + ' to your favorites?',
+                    [
+                        {
+                            text: 'Cancel',
+                            onPress: () => console.log('Cancel button pressed.'),
+                            style: 'cancel',
+                        },
+                        {
+                            text: 'OK',
+                            onPress: () => favorite ? console.log('Already favorited') : markFavorite(),
+                        },
+                    ],
+                    { cancelable: false }
+                )
+            return true; 
+        },
+    });
+
+
+    if (dish != null) {
+        return(
+            
+            <Animatable.View 
+                animation="fadeInDown" 
+                duration={2000}
+                {...panResponder.panHandlers}
+            >
+                <Card
+                    featuredTitle={dish.name}
+                    image={ {uri: baseUrl + dish.image}}
+                >
+                    <Text style={{margin: 10}}>
+                        {dish.description}
+                    </Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <Icon 
+                            raised
+                            reverse
+                            name={ favorite ? 'heart' : 'heart-o' }
+                            type='font-awesome'
+                            color='#f50'
+                            onPress={() => favorite ? console.log('Already favorited') : markFavorite()}
+                        />
+                        <Icon 
+                            raised
+                            reverse
+                            name='pencil'
+                            type='font-awesome'
+                            color='#512DA8'
+                            onPress={() => openCommentForm()}
+                        />
+                    </View>
                 </Card>
             </Animatable.View>
-            
-    );
-  } else {
-    return <View></View>;
-  }
+        );
+    }
+    else {
+        return(<View></View>)
+    }
 }
-
 function RenderComments({comments}) {
-  const renderCommentItem = ({ item, index }) => {
-    return (
-      <View key={index} style={{ margin: 10 }}>
-        <Text style={{ fontSize: 14 }}>{item.comment}</Text>
-        <Text style={{ fontSize: 12 }}>{item.rating} Starts</Text>
-        <Text style={{ fontSize: 12 }}>
-          {"-- " + item.author + ", " + item.date}{" "}
-        </Text>
-      </View>
-    );
-  };
-  return (
-    <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>        
-    <Card title='Comments' >
-        <FlatList 
-            data={comments}
-            renderItem={renderCommentItem}
-            keyExtractor={item => item.id.toString()}
-            />
-    </Card>
-    </Animatable.View>
-  );
+    const renderCommentItem = ({ item, index }) => {
+        return(
+            <View key={index} style={{margin: 10}}>
+                <Text style={{fontSize: 14}}>{item.comment}</Text>
+                <Text style={{fontSize: 12}}>{item.rating} Stars</Text>
+                <Text style={{fontSize: 12}}>{'--' + item.author + ', ' + item.date}</Text>
+            </View>
+        );
+    }
+    
+    if (comments != null) {
+        return(
+            <Animatable.View animation="fadeInUp" duration={2000}>
+                <Card title="Comments" >
+                    <FlatList
+                        data={comments}
+                        renderItem={renderCommentItem}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </Card>
+            </Animatable.View>
+        );
+    }
+    else {
+        return(<View></View>)
+    }
 }
 
 class Dishdetail extends Component {
