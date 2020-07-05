@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Nimitha\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-native-datepicker
+  C:\Program Files\nodejs\node.exe C:\Users\HARSHITH\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-native-swipeout
 
 PATH: 
-  C:\Python38\Scripts\;C:\Python38\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files\AdoptOpenJDK\jdk-11.0.4.11-hotspot\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_201\bin;C:\Program Files\Java\jre1.8.0_201\bin;C:\Program Files\Java\javafx-sdk-11.0.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\Nimitha\Anaconda3;C:\Users\Nimitha\Anaconda3\Library\mingw-w64\bin;C:\Users\Nimitha\Anaconda3\Library\usr\bin;C:\Users\Nimitha\Anaconda3\Library\bin;C:\Users\Nimitha\Anaconda3\Scripts;C:\Python37-32\Scripts\;C:\Python37-32\;C:\Users\Nimitha\AppData\Local\Microsoft\WindowsApps;C:\Users\Nimitha\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\Nmap;C:\Program Files\JetBrains\PyCharm Community Edition 2019.2\bin;;%JAVA_HOME\bin;C:\Program Files\Java\jdk1.8.0_201\bin;C:\Users\Nimitha\AppData\Roaming\npm;C:\Program Files\MongoDB\Server\4.2\bin;
+  C:\Program Files (x86)\Intel\TXE Components\TCS\;C:\Program Files\Intel\TXE Components\TCS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\TXE Components\DAL\;C:\Program Files (x86)\Intel\TXE Components\DAL\;C:\Program Files\Intel\TXE Components\IPT\;C:\Program Files (x86)\Intel\TXE Components\IPT\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\4.2\bin;;C:\Users\HARSHITH\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HARSHITH\AppData\Local\Microsoft\WindowsApps;C:\Users\HARSHITH\AppData\Roaming\npm
 
 Yarn version: 
   1.22.4
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Nimitha\Desktop\Full stack development\React-Native\confusion\node_modules\@babel\compat-data\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\HARSHITH\Desktop\coursera\new\ new react-native\node_modules\@babel\compat-data\node_modules\.bin'
 
 npm manifest: 
   {
@@ -32,6 +32,7 @@ npm manifest:
       "react": "~16.9.0",
       "react-dom": "~16.9.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+      "react-native-datepicker": "^1.7.2",
       "react-native-elements": "^1.0.0-beta8",
       "react-native-gesture-handler": "~1.6.0",
       "react-native-reanimated": "~1.7.0",
@@ -3867,6 +3868,11 @@ Lockfile:
     dependencies:
       minimist "^1.2.5"
   
+  moment@^2.22.0:
+    version "2.27.0"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
+    integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
+  
   morgan@^1.9.0:
     version "1.10.0"
     resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.10.0.tgz#091778abc1fc47cd3509824653dae1faab6b17d7"
@@ -4470,6 +4476,13 @@ Lockfile:
     version "16.13.1"
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
     integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+  
+  react-native-datepicker@^1.7.2:
+    version "1.7.2"
+    resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz#58d0822591a0ac9b32aba082650222a0ee29669d"
+    integrity sha1-WNCCJZGgrJsyq6CCZQIioO4pZp0=
+    dependencies:
+      moment "^2.22.0"
   
   react-native-elements@^1.0.0-beta8:
     version "1.2.7"
