@@ -53,10 +53,15 @@ class Home extends Component {
         this.animatedValue = new Animated.Value(0);        
     }
     static navigationOptions = {
-        title: 'Home',
-       
-    };
-
+        title: "About Us",
+        headerStyle: {
+          backgroundColor: "blue",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          color: "#fff",
+        },
+      };
     componentDidMount () {
         this.animate()
     }

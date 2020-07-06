@@ -17,93 +17,93 @@ const mapDispatchToProps = dispatch => ({
     postFavorite: (dishId) => dispatch(postFavorite(dishId)),
     postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
 });
-function RenderDish({ 
-    dish, 
+
+function RenderDish({
+    dish,
     favorite,
     markFavorite,
     openCommentForm,
-}) {
-  handleViewRef = ref => this.view = ref;
-    const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
-        if (dx < -200)
-            return true; 
-        return false;
+  }) {
+    
+    handleViewRef = null;
+    const recognizeDrag = ({ dx }) => {
+      if (dx < -200) return true; 
+      return false;
     };
-
+  
+    const recognizeComment = ({ dx }) => {
+      if (dx > 200) return true; 
+      return false;
+    };
+  
     const panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: (e, gestureState) => {
-            return true; 
-        },
-        onPanResponderGrant: () => {
-          this.view.rubberBand(1000)
-              .then(endState => console.log(endState.finised ? 'finished' : 'cancelled' ))
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => this.handleViewRef.rubberBand(1000),
+      onPanResponderEnd: (e, gestureState) => {
+        if (recognizeDrag(gestureState)) {
+          Alert.alert(
+            'Add to Favorites?',
+            `Are you sure you wish to add ${dish.name} to your favorites?`,
+            [
+              {
+                text: 'Cancel',
+                style: 'cancel',
+              },
+              {
+                text: 'OK',
+             
+                onPress: () => favorite ? console.log('Already favorited') : markFavorite(),
+              },
+            ],
+            { cancelable: false },
+          );
+        } else if (recognizeComment(gestureState)) {
+          openCommentForm();
+        }
+        return true;
       },
-        onPanResponderEnd: (e, gestureState) => {
-            if (recognizeDrag(gestureState))
-                Alert.alert(
-                    'Add to Favorites?',
-                    'Are you sure you wish to add ' + dish.name + ' to your favorites?',
-                    [
-                        {
-                            text: 'Cancel',
-                            onPress: () => console.log('Cancel button pressed'),
-                            style: 'cancel',
-                        },
-                        {
-                            text: 'OK',
-                            onPress: () => favorite ? console.log('Already favorited') : markFavorite(),
-                        },
-                    ],
-                    { cancelable: false }
-                )
-            return true; 
-        },
     });
-
-
     if (dish != null) {
-        return(
-            
-            <Animatable.View 
-                animation="fadeInDown" 
-                duration={2000}
-                ref={this.handleViewRef}
-
-                {...panResponder.panHandlers}
-            >
-                <Card
-                    featuredTitle={dish.name}
-                    image={ {uri: baseUrl + dish.image}}
-                >
-                    <Text style={{margin: 10}}>
-                        {dish.description}
-                    </Text>
-                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <Icon 
-                            raised
-                            reverse
-                            name={ favorite ? 'heart' : 'heart-o' }
-                            type='font-awesome'
-                            color='#f50'
-                            onPress={() => favorite ? console.log('Already favorited') : markFavorite()}
-                        />
-                        <Icon 
-                            raised
-                            reverse
-                            name='pencil'
-                            type='font-awesome'
-                            color='#512DA8'
-                            onPress={() => openCommentForm()}
-                        />
-                    </View>
-                </Card>
-            </Animatable.View>
-        );
+      return (
+        <Animatable.View
+          animation="fadeInDown"
+          duration={2000}
+         
+          ref={ref => handleViewRef = ref}
+          {...panResponder.panHandlers}
+        >
+          <Card
+            featuredTitle={dish.name}
+            image={{ uri: baseUrl + dish.image }}
+          >
+            <Text style={{ margin: 10 }}>
+              {dish.description}
+            </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <Icon
+                raised
+                reverse
+                name={favorite ? 'heart' : 'heart-o'}
+                type="font-awesome"
+                color="#f50"
+  onPress={() => favorite ? console.log('Already favorited') : markFavorite()}
+              />
+              <Icon
+                raised
+                reverse
+                name="pencil"
+                type="font-awesome"
+                color="#512DA8"
+                onPress={() => openCommentForm()}
+              />
+            </View>
+          </Card>
+        </Animatable.View>
+      );
     }
-    else {
-        return(<View></View>)
-    }
-}
+    return (<View />);
+  }
+  
 
 function RenderComments({comments}) {
   const renderCommentItem = ({ item, index }) => {
