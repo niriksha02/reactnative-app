@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
-import { Permissions, Notifications } from 'expo';
+import *  as Permissions from 'expo-permissions';
 
 const styles = StyleSheet.create({
   formRow: {
