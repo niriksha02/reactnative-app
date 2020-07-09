@@ -1,17 +1,8 @@
 import React, { Component } from "react";
-import {
-  Alert,
-  Text,
-  ScrollView,
-} from 'react-native';
-import {
-  Button,
-  Card,
-  Icon,
-} from 'react-native-elements';
+import { Text, ScrollView, View } from "react-native";
 import * as Animatable from 'react-native-animatable';
-import * as MailComposer from 'expo-mail-composer';
-
+import { Card, Button, Icon } from 'react-native-elements';
+import * as MailComposer  from 'expo-mail-composer';
 class ContactUs extends Component {
   constructor(props) {
     super(props);
@@ -27,39 +18,32 @@ class ContactUs extends Component {
       color: "#fff",
     },
   };
- sendMail() {
+  sendMail() {
     MailComposer.composeAsync({
-      recipients: ['confusion@food.net'],
-      subject: 'Enquiry',
-      body: 'To whom it may concern:',
+        recipients: ['confusion@food.net'],
+        subject: 'Enquiry',
+        body: 'To whom it may concern:'
     })
-      .catch(error => Alert.alert(`Unable to send mail:\n${error}`));
-  }
+}
   render() {
     return (
-      <ScrollView>
-
-              <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>                
+      <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>                
                 <Card
                     title='Contact Information'>
-
-        
-                <Text>121, Clear Water Bay Road </Text><Text></Text>
-                <Text>Clear Water Bay, Kowloon</Text><Text></Text>
-                <Text>HONG KONG</Text><Text></Text>
-                <Text>Tel: +852 1234 5678</Text><Text></Text>
-                <Text>Fax: +852 8765 4321</Text><Text></Text>
-                <Text>Email:confusion@food.net</Text>
-                <Button
-              title=" Send Email"
-              buttonStyle={{ backgroundColor: '#512DA8' }}
-              icon={<Icon name="envelope-o" type="font-awesome" color="white" />}
-              onPress={ContactUs.sendMail}
-            />
-                </Card>
-                    </Animatable.View>
-                    
-      </ScrollView>
+          <Text>121, Clear Water Bay Road </Text><Text></Text>
+          <Text>Clear Water Bay, Kowloon</Text><Text></Text>
+          <Text>HONG KONG</Text><Text></Text>
+          <Text>Tel: +852 1234 5678</Text><Text></Text>
+          <Text>Fax: +852 8765 4321</Text><Text></Text>
+          <Text>Email:confusion@food.net</Text>
+          <Button
+          title="Send Email"
+          buttonStyle={{backgroundColor: "#512DA8"}}
+          icon={<Icon name='envelope-o' type='font-awesome' color='white' />}
+          onPress={this.sendMail}
+          /> 
+          </Card>
+          </Animatable.View>
     );
   }
 }

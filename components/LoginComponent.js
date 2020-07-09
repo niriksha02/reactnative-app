@@ -6,11 +6,9 @@ import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { baseUrl } from "../shared/baseUrl";
-
-import * as ImageManipulator from 'expo-image-manipulator'
-import * as Asset from 'expo-asset'
-import * as Camera from 'expo-camera'
-
+import * as ImageManipulator from "expo-image-manipulator";
+import * as Asset from "expo-asset";
+import * as Camera from "expo-camera";
 class LoginTab extends Component {
   constructor(props) {
     super(props);
@@ -149,33 +147,55 @@ class RegisterTab extends Component {
 
   getImageFromCamera = async () => {
     const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
-    const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const cameraRollPermission = await Permissions.askAsync(
+      Permissions.CAMERA_ROLL
+    );
 
-
-    if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
+    if (
+      cameraPermission.status === "granted" &&
+      cameraRollPermission.status === "granted"
+    ) {
       let capturedImage = await ImagePicker.launchCameraAsync({
-          allowsEditing: true,
-          aspect: [4, 3],
+        allowsEditing: true,
+        aspect: [4, 3],
       });
       if (!capturedImage.cancelled) {
+        console.log(capturedImage);
+        this.processImage(capturedImage.uri);
+      }
+    }
+  };
+  getImageFromGallery = async () => {
+    try {
+      const cameraRollPermission = await Permissions.askAsync(
+        Permissions.CAMERA_ROLL
+      );
+      if (cameraRollPermission.status === "granted") {
+        let capturedImage = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        if (!capturedImage.cancelled) {
           console.log(capturedImage);
           this.processImage(capturedImage.uri);
+        }
       }
-  }
-}
-
-processImage = async (imageUri) => {
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  processImage = async (imageUri) => {
     let processedImage = await ImageManipulator.manipulateAsync(
-        imageUri, 
-        [
-            {resize: {width: 400}}
-        ],
-        {format: ImageManipulator.SaveFormat.PNG}
+      imageUri,
+      [{ resize: { width: 400 } }],
+      { format: ImageManipulator.SaveFormat.PNG }
     );
     console.log(processedImage);
-    this.setState({imageUrl: processedImage.uri });
+    this.setState({ imageUrl: processedImage.uri });
+  };
 
-}
   static navigationOptions = {
     title: "Register",
     headerStyle: {
@@ -218,6 +238,7 @@ processImage = async (imageUri) => {
               style={styles.image}
             />
             <Button title="Camera" onPress={this.getImageFromCamera} />
+            <Button title="Gallery" onPress={this.getImageFromGallery} />
           </View>
           <Input
             placeholder="Username"
@@ -292,6 +313,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     flexDirection: "row",
+    justifyContent:'space-around',
     margin: 20,
   },
   image: {
