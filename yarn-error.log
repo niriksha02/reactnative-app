@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\HARSHITH\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-navigation-tabs
+  C:\Program Files\nodejs\node.exe C:\Users\HARSHITH\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add expo-image-manipulator@~8.1.0
 
 PATH: 
   C:\Program Files (x86)\Intel\TXE Components\TCS\;C:\Program Files\Intel\TXE Components\TCS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\Intel\TXE Components\DAL\;C:\Program Files (x86)\Intel\TXE Components\DAL\;C:\Program Files\Intel\TXE Components\IPT\;C:\Program Files (x86)\Intel\TXE Components\IPT\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\4.2\bin;;C:\Users\HARSHITH\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HARSHITH\AppData\Local\Microsoft\WindowsApps;C:\Users\HARSHITH\AppData\Roaming\npm
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\HARSHITH\Desktop\coursera\new\ new react-native\node_modules\@babel\helper-compilation-targets\node_modules\.bin'
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\HARSHITH\AppData\Local\Yarn\Cache\v6\npm-expo-constants-9.0.0-35c600079ee91d38fe4f56375caae6e90f122fdd-integrity\node_modules\expo-constants\src\__tests__\Constants-test.ts' -> 'C:\Users\HARSHITH\Desktop\coursera\new\ new react-native\node_modules\expo-constants\src\__tests__\Constants-test.ts'
 
 npm manifest: 
   {
@@ -29,6 +29,9 @@ npm manifest:
     "dependencies": {
       "@react-native-community/masked-view": "0.1.6",
       "expo": "~37.0.3",
+      "expo-asset": "~8.1.5",
+      "expo-camera": "~8.2.0",
+      "expo-image-picker": "~8.1.0",
       "expo-mail-composer": "~8.1.0",
       "expo-permissions": "~8.1.0",
       "expo-secure-store": "~8.1.0",
@@ -48,6 +51,7 @@ npm manifest:
       "react-navigation": "^4.3.9",
       "react-navigation-drawer": "^2.4.13",
       "react-navigation-stack": "^2.7.0",
+      "react-navigation-tabs": "^2.9.0",
       "react-redux": "^7.2.0",
       "redux": "^4.0.5",
       "redux-logger": "^3.0.6",
@@ -2421,6 +2425,14 @@ Lockfile:
       path-browserify "^1.0.0"
       url-parse "^1.4.4"
   
+  expo-camera@~8.2.0:
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-8.2.0.tgz#9c849f0dc409e1fe6ee886f479e0ee0050b6d386"
+    integrity sha512-wGVqQVVR4YCkHuI7u+qloI1p2UbYwpU8hs0IEM+1Th4JQekAPUEfOmJI6ZHGj36El8f87ghRed2MXzOssn4hHg==
+    dependencies:
+      lodash "^4.6.0"
+      prop-types "^15.6.0"
+  
   expo-constants@~9.0.0:
     version "9.0.0"
     resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-9.0.0.tgz#35c600079ee91d38fe4f56375caae6e90f122fdd"
@@ -2453,6 +2465,13 @@ Lockfile:
     dependencies:
       fbjs "1.0.0"
       fontfaceobserver "^2.1.0"
+  
+  expo-image-picker@~8.1.0:
+    version "8.1.0"
+    resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.1.0.tgz#014e4f4aaef4c1daf56d13de27a41ef78660aa15"
+    integrity sha512-UMHiDGiflg47A/nfnmJ1gYdB/sEoxB4STVGgMeLNYpUkVR59kUWqsGTyVEtSywNCLPuXPZVB9NaRUd81Rbs7lA==
+    dependencies:
+      expo-permissions "~8.1.0"
   
   expo-keep-awake@~8.1.0:
     version "8.1.0"
@@ -4507,6 +4526,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
     integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
   
+  react-lifecycles-compat@^3.0.4:
+    version "3.0.4"
+    resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+    integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+  
   react-native-animatable@1.2.4:
     version "1.2.4"
     resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.2.4.tgz#b5fb7657e8f6edadbc26697057a327fb920b3039"
@@ -4605,6 +4629,11 @@ Lockfile:
       prop-types "^15.5.10"
       react-tween-state "^0.1.5"
   
+  react-native-tab-view@^2.11.0:
+    version "2.14.4"
+    resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.14.4.tgz#740007e62c8723c6813b8c8a05caaaf82c816620"
+    integrity sha512-oqkCflPFuZwDTbyY2WaN0377akSsmcttuYACR9LT7htZfO/tKR2Z/ynj1tbv2cz2esGuVICoga9cetN1lPimog==
+  
   react-native-view-shot@3.1.2:
     version "3.1.2"
     resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-3.1.2.tgz#8c8e84c67a4bc8b603e697dbbd59dbc9b4f84825"
@@ -4672,6 +4701,16 @@ Lockfile:
     dependencies:
       color "^3.1.2"
       react-native-iphone-x-helper "^1.2.1"
+  
+  react-navigation-tabs@^2.9.0:
+    version "2.9.0"
+    resolved "https://registry.yarnpkg.com/react-navigation-tabs/-/react-navigation-tabs-2.9.0.tgz#37407106f33367ff0ef3e5bb128d03f2721a50ef"
+    integrity sha512-+C9wyPtgxpEedhs1aX8pwtM7gJtpDMN3wPwq0jNkmONaurhb3hvE+mt3D7CLtX+zwxmMhcrPxSTSkynORKNn8g==
+    dependencies:
+      hoist-non-react-statics "^3.3.2"
+      react-lifecycles-compat "^3.0.4"
+      react-native-safe-area-view "^0.14.9"
+      react-native-tab-view "^2.11.0"
   
   react-navigation@^4.3.9:
     version "4.4.0"
